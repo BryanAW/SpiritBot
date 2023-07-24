@@ -32,7 +32,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('Bible Quiz')
                 .setDescription(`**Question:** ${randomQuestion.question}`)
-                .setColor('Green')
+                .setColor('White')
                 .setTimestamp(new Date());
 
             // Create buttons for each option
@@ -69,12 +69,15 @@ module.exports = {
 
             if (selectedOptionIndex === correctOptionIndex) {
                 resultMessage = 'Correct! You chose the right answer!';
+                color = 'Green';
             } else {
                 resultMessage = `Incorrect! The correct answer was: ${randomQuestion.options[correctOptionIndex]}`;
+                color = 'Red';
             }
 
             // Edit the original message with the result and remove buttons
             embed.setDescription(`${resultMessage}\n\n${randomQuestion.options[correctOptionIndex]}`);
+            embed.setColor(color);
             reply.edit({ embeds: [embed], components: [] });
         } catch (error) {
             console.log(`Error with /biblequiz`);
